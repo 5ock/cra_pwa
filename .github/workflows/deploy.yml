@@ -33,8 +33,9 @@ jobs:
           
       # Runs a single command using the runners shell
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v4
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Settings > Secret 建立的 ACCESS_TOKEN，推同個 repo 的話可以不需要
-          BRANCH: gh-pages # deploy 到 gh-pages 這個分支
-          FOLDER: build # build 後的資料夾
+          # 存储库中要部署的文件夹。
+          # 该步骤会将项目中 FOLDER 指定文件夹下的文件推送到 BRANCH 分支，作为Github Pages 部署的内容。
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.

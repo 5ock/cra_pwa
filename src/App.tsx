@@ -29,7 +29,7 @@ function App() {
         >
           Learn React
         </a>
-        <a onClick={() => iOSOpenApp()}>test open ios link</a>
+        <a href='/' onClick={() => iOSOpenApp()}>test open ios link</a>
       </header>
     </div>
   );

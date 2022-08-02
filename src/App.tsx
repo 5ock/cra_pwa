@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-function App() {  
+const App = () => {
+
+  const [ deviceOS, setDeviceOS ] = useState<string>('')
+
+  const detecDeviceOS = () => {
+    let userAgent = navigator.userAgent || navigator.vendor
+    let result = 'web'
+    if (/android/i.test(userAgent)) {
+      result = "Android"
+    }
+    if (/iPad|iPhone|iPod/.test(userAgent)) {
+      result = "iOS"
+    }
+
+    setDeviceOS(result)
+}
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,18 +26,14 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
         <a href='https://apps.apple.com/tw/app/'
           target='_blank'
           rel="noreferrer noopener"
-        >test open ios link</a>
+        >{`[test]iOS app store link`}</a>
+        <div>
+          <button onClick={() => detecDeviceOS()}>Detec device OS</button>
+          <p>{deviceOS}</p>
+        </div>
       </header>
     </div>
   );

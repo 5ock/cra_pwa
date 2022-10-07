@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <div>cra-pwa-v03</div>
+        <div>cra-pwa-v04</div>
         <a href='https://apps.apple.com/tw/app/'
           target='_blank'
           rel="noreferrer noopener"

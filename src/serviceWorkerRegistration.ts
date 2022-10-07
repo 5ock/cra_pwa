@@ -42,22 +42,14 @@ export function register(config?: Config) {
         // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, config);
 
-        navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/utils/firebase-messaging-sw.ts`)
-        .then(registration => {
-         console.log('Registration was successful: ', registration)
-        })
-        .catch(e => {
-         console.error('Registration has filed', e)
-        })
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-
-        // navigator.serviceWorker.ready.then(() => {
-        //   console.log(
-        //     'This web app is being served cache-first by a service ' +
-        //       'worker. To learn more, visit https://cra.link/PWA'
-        //   );
-        // });
+        navigator.serviceWorker.ready.then(() => {
+          console.log(
+            'This web app is being served cache-first by a service ' +
+              'worker. To learn more, visit https://cra.link/PWA'
+          );
+        });
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
@@ -159,3 +151,12 @@ if ('Notification' in window) {
     });
   }
 }
+if ('serviceWorker' in navigator) { 
+  navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/firebase-messaging-sw.ts`)
+  .then(registration => {
+   console.log('Registration was successful: ', registration)
+  })
+  .catch(e => {
+   console.error('Registration has filed', e)
+  })
+ }

@@ -27,7 +27,7 @@ export function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     
-    navigator.serviceWorker.register('./utils/firebase-messaging-sw.js')
+    navigator.serviceWorker.register('./utils/firebase-messaging-sw.ts')
      .then(registration => {
       console.log('Registration was successful: ', registration)
      })

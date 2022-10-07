@@ -99,8 +99,15 @@ self.addEventListener('activate', event => {
   )
 })
 
-self.addEventListener('push', event => {
-  console.log(event)
-})
-
+self.addEventListener('push', e => { 
+  const dataObj = e.data && e.data.json() 
+  const {data} = dataObj
+  console.log(data)
+  const notificationOptions = {} 
+  // 執行一些邏輯來實現 notificationOptions 
+  
+  e.waitUntil( 
+    self.registration .showNotification('Title', notificationOptions) 
+  ); 
+});
 

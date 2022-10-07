@@ -131,13 +131,13 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 
 export function unregister() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then((registration) => {
-        registration.unregister();
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+    navigator.serviceWorker.register('./utils/firebase-messaging-sw.js')
+     .then(registration => {
+      console.log('Registration was successful: ', registration)
+     })
+     .catch(e => {
+      console.error('Registration has filed', e)
+     })
   }
 }
 

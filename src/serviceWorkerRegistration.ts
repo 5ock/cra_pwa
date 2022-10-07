@@ -151,12 +151,3 @@ if ('Notification' in window) {
     });
   }
 }
-if ('serviceWorker' in navigator) { 
-  navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/firebase-messaging-sw.ts`)
-  .then(registration => {
-   console.log('Registration was successful: ', registration)
-  })
-  .catch(e => {
-   console.error('Registration has filed', e)
-  })
- }

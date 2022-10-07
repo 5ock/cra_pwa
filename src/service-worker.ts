@@ -16,8 +16,6 @@ import { StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
 
-const PRECACHE = 'precache-v01';
-const RUNTIME = 'runtime-v01';
 
 clientsClaim();
 
@@ -82,23 +80,23 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
+const PRECACHE = 'cra-pwa-v01';
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(PRECACHE)
-      .then(cache => cache.addAll([]))
+      .then(cache => cache.add(PRECACHE))
       .then(() => self.skipWaiting())
   )
 })
 
 self.addEventListener('activate', event => {
-  const currentCaches = [PRECACHE, RUNTIME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
-      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
-    }).then(cachesToDelete => {
-      return Promise.all(cachesToDelete.map(cacheToDelete => {
-        return caches.delete(cacheToDelete);
-      }));
+      console.log(cacheNames)
+      // return cacheNames
+      //   .filter(cacheName => PRECACHE.includes(cacheName))
+      //   .map(cacheToDelete => caches.delete(cacheToDelete))
     }).then(() => self.clients.claim())
   );
 });

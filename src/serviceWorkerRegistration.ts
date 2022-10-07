@@ -140,3 +140,13 @@ export function unregister() {
       });
   }
 }
+
+if ('Notification' in window) {
+  console.log('Notification.permission:' + Notification.permission);
+  if (Notification.permission !== 'granted') {
+    console.log('Ask user permission')
+    Notification.requestPermission(status => {
+      console.log('Status:' + status)
+    });
+  }
+}

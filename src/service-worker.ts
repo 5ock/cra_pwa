@@ -107,7 +107,7 @@ self.addEventListener('push', e => {
   // 執行一些邏輯來實現 notificationOptions 
   
   e.waitUntil( 
-    self.registration .showNotification('Title', notificationOptions) 
+    self.registration.showNotification('Title', notificationOptions) 
   ); 
 });
 

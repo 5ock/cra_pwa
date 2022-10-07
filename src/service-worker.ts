@@ -80,7 +80,7 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-const PRECACHE = 'cra-pwa-v02';
+const PRECACHE = 'cra-pwa-v03';
 
 self.addEventListener('install', event => {
   event.waitUntil(

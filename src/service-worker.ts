@@ -85,7 +85,6 @@ const PRECACHE = 'cra-pwa-v01';
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(PRECACHE)
-      .then(cache => cache.add(PRECACHE))
       .then(() => self.skipWaiting())
   )
 })
@@ -94,9 +93,9 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       console.log(cacheNames)
-      // return cacheNames
-      //   .filter(cacheName => PRECACHE.includes(cacheName))
-      //   .map(cacheToDelete => caches.delete(cacheToDelete))
+      return cacheNames
+        .filter(cacheName => PRECACHE.includes(cacheName))
+        .map(cacheToDelete => caches.delete(cacheToDelete))
     }).then(() => self.clients.claim())
   );
 });

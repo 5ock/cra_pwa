@@ -80,7 +80,7 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-const PRECACHE = 'cra-pwa-v01';
+const PRECACHE = 'cra-pwa-v02';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -92,12 +92,15 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
-      console.log(cacheNames)
       return cacheNames
-        .filter(cacheName => PRECACHE.includes(cacheName))
+        .filter(cacheName => !PRECACHE.includes(cacheName))
         .map(cacheToDelete => caches.delete(cacheToDelete))
     }).then(() => self.clients.claim())
-  );
-});
+  )
+})
+
+self.addEventListener('push', event => {
+  console.log(event)
+})
 
 

@@ -1,39 +1,21 @@
 import React, { useState } from 'react'
-// import logo from './logo.svg';
-import './App.css'
 
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+
+import LinkToStore from './components/linkToStore'
+import DetecDevice from './components/detecDevice'
 
 const App = () => {
-  const [ deviceOS, setDeviceOS ] = useState<string>('')
 
-  const detecDeviceOS = () => {
-    let userAgent = navigator.userAgent || navigator.vendor
-    let result = 'web'
-    if (/android/i.test(userAgent)) {
-      result = "Android"
-    }
-    if (/iPad|iPhone|iPod/.test(userAgent)) {
-      result = "iOS"
-    }
+  return (<Box>
+    <Typography variant='h2'>CRA - PWA</Typography>
+    {/* link to store */}
+    <LinkToStore />
 
-    setDeviceOS(result)
-  }
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div>cra-pwa-v04</div>
-        <a href='https://apps.apple.com/tw/app/'
-          target='_blank'
-          rel="noreferrer noopener"
-        >{`[test]iOS app store link`}</a>
-        <div>
-          <button onClick={() => detecDeviceOS()}>Detec device OS</button>
-          <p>{deviceOS}</p>
-        </div>
-      </header>
-    </div>
-  );
+    {/* detec device os */}
+    <DetecDevice />
+  </Box>);
 }
 
 export default App;

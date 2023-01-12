@@ -24,7 +24,18 @@ const TakePhoto = () => {
     <Box sx={{textAlign: 'center'}}>
       <h5>Capture your image</h5>
       {source &&
-        <Box display="flex" justifyContent="center" sx={{border: '1px solid #ccc'}}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          sx={{
+            border: '1px solid #ccc',
+            width: '100%',
+            'img': {
+              width: 'inherit',
+              height: 'inherit'
+            }
+          }}
+        >
           <img src={source} alt={"snap"}></img>
         </Box>
       }

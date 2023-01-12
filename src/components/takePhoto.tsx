@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton'
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined'
 
 import Block from './ui/block'

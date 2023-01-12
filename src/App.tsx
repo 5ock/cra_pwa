@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 
 import LinkToStore from './components/linkToStore'
 import DetecDevice from './components/detecDevice'
+import TakePhoto from './components/takePhoto'
 
 const App = () => {
 
@@ -15,6 +16,9 @@ const App = () => {
 
     {/* detec device os */}
     <DetecDevice />
+
+    {/* take photo */}
+    <TakePhoto />
   </Box>);
 }
 

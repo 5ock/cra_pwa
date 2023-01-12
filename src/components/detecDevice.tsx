@@ -8,7 +8,7 @@ import Block from './ui/block'
 const DetecDevice = () => {
   const [ deviceOS, setDeviceOS ] = useState<string>('please click')
 
-  const detecDeviceOS = ():void => {
+  const detecDeviceOS = () => {
     let userAgent = navigator.userAgent || navigator.vendor
     let result = 'web'
     if (/android/i.test(userAgent))

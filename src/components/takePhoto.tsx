@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined'
 
 import Block from './ui/block'
@@ -19,10 +20,9 @@ const TakePhoto = () => {
     }
   }
 
-
   return (<Block title='Take Photo, Photo library, Choose File'>
     <Box sx={{textAlign: 'center'}}>
-      <h5>Capture your image</h5>
+      <Typography variant='h5'>Capture your image</Typography>
       {source &&
         <Box
           display="flex"

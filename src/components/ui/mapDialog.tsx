@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-import { LatLngBounds } from 'leaflet'
+// import { LatLngBounds } from 'leaflet'
 import _ from 'lodash'
 
 import 'leaflet/dist/leaflet.css'

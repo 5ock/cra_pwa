@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined'
 
 import Block from './ui/block'
 import MapDialog from './ui/mapDialog'

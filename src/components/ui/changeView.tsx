@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useMap } from 'react-leaflet'
-import _ from 'lodash'
 
 interface ICenter {
     lat: number;
@@ -12,12 +11,12 @@ interface IChangeViewProps {
 }
 
 const ChangeView = (props: IChangeViewProps) => {
-    const { center, zoom } = props
+    const { center } = props
     const map = useMap()
 
     useEffect(() => {
         map.setView(center, undefined, {animate: false})
-    }, [JSON.stringify(center)])
+    }, [map, center])
 
     return null
 }

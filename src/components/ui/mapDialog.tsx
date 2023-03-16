@@ -1,19 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
-// import { LatLngBounds } from 'leaflet'
+import ReactDOMServer from 'react-dom/server';
+import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
 import _ from 'lodash'
-
+import L, { LatLngBounds } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
+import PlaceIcon from '@mui/icons-material/Place'
 import Typography from '@mui/material/Typography'
+
+import ChangeView from './changeView'
+
+// type
 
 interface IMapCenter {
   lat: number;
   lng: number;
 }
+
+const initMapCenter:IMapCenter = {
+  lat: 23.762697,
+  lng: 120.981334,
+}
+
 interface IGisMapMarkerDialog {
   mapUrl: string;
   onConfirm?: (position:string) => void;
@@ -23,50 +34,55 @@ interface IGisMapMarkerDialog {
 const MapDialog = (props: IGisMapMarkerDialog) => {
   const { mapUrl, onClose } = props
 
-  const [ center, setCenter ] = useState<IMapCenter>({ lat: 10, lng: 10})
-  // const [ zoom, setZoom ] = useState<number>(7)
+  const [ center, setCenter ] = useState<IMapCenter>(initMapCenter)
+  const [ zoom, setZoom ] = useState<number>(15)
 
   const isMounted = useRef<boolean>(false)
-  // const bounds: LatLngBounds = new LatLngBounds(
-  //   [51.505, -0.09], // Southwest coordinates
-  //   [51.52, -0.065], // Northeast coordinates
-  // )
+
+  const maxBounds: LatLngBounds = new LatLngBounds(
+    [11.587017, 115.169788], // Southwest coordinates
+    [34.629829, 128.188476], // Northeast coordinates
+  )
+  
+  const customMarkerIcon = L.divIcon({
+    html: ReactDOMServer.renderToString( <PlaceIcon className="custom-icon" fontSize="large" />),
+    className: '',
+    iconSize: [48, 48],
+    iconAnchor: [24, 48],
+  });
+
   const MapEvent = () => {
     useMapEvents({
-      zoomlevelschange: e => {
-        let { _southWest: latLngStart,  _northEast: latLngEnd } = e.target.getBounds()
-          // setMapBounds({latLngStart, latLngEnd})
-        console.log({_southWest: latLngStart,  _northEast: latLngEnd})
-      },
-      zoomend: e => {
-        console.log(e.target.getZoom())
-          // dispatch(setCurrentZoom(e.target.getZoom()))
-      },
-      moveend: e => {
-        let { _southWest: latLngStart,  _northEast: latLngEnd} = e.target.getBounds()
-          // setMapBounds({latLngStart, latLngEnd})
-        let { lat, lng} = e.target.getCenter()
-
+      move: e => {
+        let { lat, lng } = e.target.getCenter()  
         setCenter({lat: _.floor(lat, 6), lng: _.floor(lng, 6)})
-        console.log({_southWest: latLngStart,  _northEast: latLngEnd})
       }
     })
     return null
   }
 
+  const handleInitCenter = () => {
+    // if(dataCenter) {
+    //   setCenter(dataCenter)
+    //   return setZoom(15)
+    // }
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const latAndLng = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        console.log(latAndLng)
+        setCenter(latAndLng)
+        setZoom(15)
+      })
+    }
+  }
+
   useEffect(() =>{ 
     if(!isMounted.current) {
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const latAndLng = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
-          setCenter(latAndLng)
-          // dispatch(setCurrentZoom(gisMapInitViewZoom))
-          // dispatch(setMapArea(''))
-        })
-      }
+      handleInitCenter()
     }
   }, [])
 
@@ -79,18 +95,17 @@ const MapDialog = (props: IGisMapMarkerDialog) => {
       width: '80vw'
     }}>
       <MapContainer
-        // bounds={bounds}
-        center={{
-          lat: 22.094681288189726,
-          lng: 120.74705262734024,
-        }}
-        zoom={7}
+        maxBounds={maxBounds}
+        center={center}
+        zoom={zoom}
         attributionControl={false}
         style={{height: 'inherit', width: 'inherit'}}>
+        <ChangeView center={center} zoom={zoom} />
         <MapEvent />
         <TileLayer url={mapUrl}
-          maxZoom={13}
-          minZoom={7}/>
+          maxZoom={15}
+          minZoom={5}/>
+        <Marker position={center} icon={customMarkerIcon} />
       </MapContainer>
     </Box>
     <Button onClick={onClose}>close</Button>

@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import LinkToStore from './components/linkToStore'
 import DetecDevice from './components/detecDevice'
 import TakePhoto from './components/takePhoto'
+import MapTest from './components/mapTest'
 
 const App = () => {
 
@@ -19,6 +20,9 @@ const App = () => {
 
     {/* take photo */}
     <TakePhoto />
+
+    {/* map test */}
+    <MapTest />
   </Box>);
 }
 

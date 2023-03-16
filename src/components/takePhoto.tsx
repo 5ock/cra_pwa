@@ -11,12 +11,10 @@ const TakePhoto = () => {
   const [source, setSource] = useState<string>("")
 
   const handleCapture = (target:any) => {
-    if (target.files) {
-      if (target.files.length !== 0) {
-        const file = target.files[0];
-        const newUrl = URL.createObjectURL(file);
-        setSource(newUrl);
-      }
+    if(target.files && target.files.length !== 0) {
+      const file = target.files[0]
+      const newUrl = URL.createObjectURL(file)
+      setSource(newUrl)
     }
   }
 
@@ -36,7 +34,7 @@ const TakePhoto = () => {
             }
           }}
         >
-          <img src={source} alt={"snap"}></img>
+          <img src={source} alt={"snap"} />
         </Box>
       }
       <label htmlFor="icon-button-file">

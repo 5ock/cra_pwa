@@ -24,7 +24,7 @@ const MapDialog = (props: IGisMapMarkerDialog) => {
   const { mapUrl, onClose } = props
 
   const [ center, setCenter ] = useState<IMapCenter>({ lat: 10, lng: 10})
-  const [ zoom, setZoom ] = useState<number>(7)
+  // const [ zoom, setZoom ] = useState<number>(7)
 
   const isMounted = useRef<boolean>(false)
   // const bounds: LatLngBounds = new LatLngBounds(
@@ -32,7 +32,7 @@ const MapDialog = (props: IGisMapMarkerDialog) => {
   //   [51.52, -0.065], // Northeast coordinates
   // )
   const MapEvent = () => {
-    const map = useMapEvents({
+    useMapEvents({
       zoomlevelschange: e => {
         let { _southWest: latLngStart,  _northEast: latLngEnd } = e.target.getBounds()
           // setMapBounds({latLngStart, latLngEnd})
@@ -84,7 +84,7 @@ const MapDialog = (props: IGisMapMarkerDialog) => {
           lat: 22.094681288189726,
           lng: 120.74705262734024,
         }}
-        zoom={zoom}
+        zoom={7}
         attributionControl={false}
         style={{height: 'inherit', width: 'inherit'}}>
         <MapEvent />

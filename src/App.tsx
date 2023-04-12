@@ -7,7 +7,7 @@ import LinkToStore from './components/linkToStore'
 import DetecDevice from './components/detecDevice'
 import TakePhoto from './components/takePhoto'
 import MapTest from './components/mapTest'
-import TextToSpeech from './components/textToSpeech'
+// import TextToSpeech from './components/textToSpeech'
 import DetecLocation from './components/detecLocation'
 
 const App = () => {

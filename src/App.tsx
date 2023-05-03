@@ -34,7 +34,7 @@ const App = () => {
     <DetecLocation />
 
     {/* google oauth */}
-    {/* <GoogleOauth /> */}
+    <GoogleOauth />
   </Box>);
 }
 

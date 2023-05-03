@@ -8,6 +8,18 @@ import Typography from '@mui/material/Typography'
 import Block from './ui/block'
 import {  } from '@mui/material'
 
+interface IDTokenPayload {
+  iss: string;
+  sub: string;
+  aud: string;
+  exp: number;
+  iat: number;
+  name?: string;
+  email?: string;
+  picture?: string;
+}
+
+
 const GoogleOauth = () => {
     const [ userName, setUserName ] = useState<string>('')
 
@@ -24,7 +36,11 @@ const GoogleOauth = () => {
                     ux_mode='redirect'
                     onSuccess={credentialResponse => {
                         console.log(credentialResponse)
-                        console.log(jwt_decode(credentialResponse.credential as string))
+                        let user = jwt_decode<IDTokenPayload>(credentialResponse.credential as string)
+                        if('name' in user) {
+                            const name = user.name
+                            setUserName(name as string)
+                        }
                     }}
                     onError={() => {
                         console.log('Login Failed');

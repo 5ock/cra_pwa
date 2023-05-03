@@ -9,6 +9,7 @@ import TakePhoto from './components/takePhoto'
 import MapTest from './components/mapTest'
 // import TextToSpeech from './components/textToSpeech'
 import DetecLocation from './components/detecLocation'
+import GoogleOauth from './components/googleOauth'
 
 const App = () => {
 
@@ -31,6 +32,9 @@ const App = () => {
 
     {/* detec location */}
     <DetecLocation />
+
+    {/* google oauth */}
+    <GoogleOauth />
   </Box>);
 }
 

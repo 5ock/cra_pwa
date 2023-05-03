@@ -31,7 +31,7 @@ const GoogleOauth = () => {
             display: 'flex',
             justifyContent: 'center'
         }}>
-            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_GOOGLE_ID as string}>
+            <GoogleOAuthProvider clientId={'754000738529-v1kof7hj8v4ofa5qh7vfq4dsitf05ifi.apps.googleusercontent.com'}>
                 <GoogleLogin
                     ux_mode='redirect'
                     onSuccess={credentialResponse => {
